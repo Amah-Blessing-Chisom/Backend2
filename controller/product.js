@@ -51,7 +51,7 @@ export const getproductById = async (req, res) => {
 // update all products
 export const updateProduct = async (req, res) => {
     let productId = req.params.id
-    const {name, price, description, image, category} =req.body
+    const {name, price, description, Image, category} =req.body
 
     try {
         let product = await Product.findById(productId)
@@ -61,7 +61,7 @@ export const updateProduct = async (req, res) => {
             product.name = name || product.name
             product.price = price || product.price
             product.description = description || product.description
-            product.image = image || product.image
+            product.Image =  Image || product.Image
             product.category = category|| product.category
             await product.save()
             res.status(200).json({
@@ -72,7 +72,7 @@ export const updateProduct = async (req, res) => {
                    name:product.name,
                    price:product.price,
                    description:product.description,
-                   image:product.image,
+                   Image:product.Image,
                    category:product.category
 
                 }
