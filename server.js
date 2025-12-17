@@ -14,6 +14,7 @@ server.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:3000",
   "https://backend2-1-h251.onrender.com",
 ];
 
@@ -48,6 +49,6 @@ mongoose
   .catch((err) => console.error(err));
 
 // Start server LAST
-server.listen(process.env.PORT || 5173, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log("Server running");
 });
