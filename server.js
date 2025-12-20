@@ -11,28 +11,27 @@ const server = express();
 
 // Middleware FIRST
 server.use(express.json());
-
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://localhost:3000",
-  "https://backend2-1-h251.onrender.com",
+  "https://localhost:5173",
+  "https://hgsccdigitalskills.vercel.app",
 ];
 
 server.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // mobile apps, Postman
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
       }
-      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-// Handle preflight requests
-server.options("*", cors());
 
 // Routes BEFORE listen
 server.get("/", (req, res) => {
